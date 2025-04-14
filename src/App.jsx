@@ -1,4 +1,5 @@
 import Banner from "./components/Banner/Banner"
+import CoinTable from "./components/CoinTable/CoinTable"
 import Navbar from "./components/Navbar/Navbar"
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 		<div>
 			<Navbar />
 			<Banner />
+			<CoinTable/>
 		</div>
     )
 }

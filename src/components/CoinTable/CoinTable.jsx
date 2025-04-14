@@ -2,12 +2,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchCoinDataByMarket } from "../../services/fetchCoinDataByMarket";
 import { useState } from "react";
+import { useCurrencyStore } from "../../store/currencyStore";
 
 function CoinTable() {
+    const currency = useCurrencyStore((state)=>state.currency);
     const [page, setPage] = useState(1);
     const { isError, isLoading, error, data } = useQuery({
-        queryKey: ['coins', page],
-        queryFn: () => fetchCoinDataByMarket('usd', page),
+        queryKey: ['coins', page, currency],
+        queryFn: () => fetchCoinDataByMarket(currency, page),
         // retry: 2,
         // retryDelay: 1000,
         cacheTime: 1000 * 60 * 2, // 2 minutes . Even if cache time is set , data is refetched but ui is updated immediately from cache and if some inconsistencies happen then ui is updated again
@@ -17,6 +19,7 @@ function CoinTable() {
 
 
     return (
+       
         <div className="m-2 ">
             <div className="overflow-x-auto bg-black/50">
                 <table className="table">
@@ -63,7 +66,7 @@ function CoinTable() {
                                         </div>
                                     </td>
                                     <td>
-                                        {`$ ${coin.current_price}`}
+                                        {`${currency === 'usd' ? '$' : '₹'} ${coin.current_price}`}
                                     </td>
                                     <td>{coin.price_change_24h}</td>
                                     <td>{coin.market_cap}</td>

@@ -3,25 +3,41 @@ import { useParams } from "react-router-dom";
 import fetchCoinDetails from "../services/fetchCoinDetails";
 import { useCurrencyStore } from "../store/currencyStore";
 import parse from 'html-react-parser';
-import Chart from "../components/Chart/Chart";
+import fetchCoinChartData from "../services/fetchCoinChartData";
+import CustomLineChart from "../components/Chart/CustomLineChart";
 
 
 function CoinDetails() {
     const currency = useCurrencyStore((state) => state.currency)
     const { id } = useParams();
 
-    const { isLoading, isError,  data: coin } = useQuery({
+    const { isLoading: isCoinDetailsLoading, isError: isCoinDetailsError,  data: coin } = useQuery({
         queryKey: ['coinDetails', id],
         queryFn: () => fetchCoinDetails(id),
         cacheTime: 1000 * 60 * 2,
         staleTime: 1000 * 60 * 2
     });
 
-    if (isError) {
+    const {isError: isChartError, isLoading : isChartLoading, data : chartData} = useQuery({
+        queryKey: ['coinChartData', id, currency],
+        queryFn: async () => {
+            const responsedData = await fetchCoinChartData(id, currency);
+            return responsedData.prices.map((ele)=>{
+                return {
+                    name : new Date(ele[0]).toDateString(),
+                    price : Math.round(ele[1]*100)/100
+                }
+            })
+        },
+        cacheTime: 1000 * 60 * 2,
+        staleTime: 1000 * 60 * 2
+    })
+
+    if (isCoinDetailsError) {
         return <div>Error while fetching Coin Details </div>
     }
 
-    if (isLoading) {
+    if (isCoinDetailsLoading) {
         return <div className="flex justify-center">
             <span className="loading loading-spinner text-primary"></span>
         </div>
@@ -79,9 +95,14 @@ function CoinDetails() {
             </div>
 
             <div className="md:w-2/3 w-full p-10">
+                {
+                    isChartError && <div>Error while fetching chart data</div>
+                }
 
-
-                <Chart id={id}/>
+                {isChartLoading && <div className="flex justify-center">
+                    <span className="loading loading-spinner text-primary"></span>
+                </div>}
+                <CustomLineChart data={chartData} dataKey="price"/>
             </div>
 
         </div>

@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import fetchCoinDetails from "../services/fetchCoinDetails";
 import { useCurrencyStore } from "../store/currencyStore";
 import parse from 'html-react-parser';
+import Chart from "../components/Chart/Chart";
 
 
 function CoinDetails() {
     const currency = useCurrencyStore((state) => state.currency)
     const { id } = useParams();
 
-    const { isLoading, isError, error, data: coin } = useQuery({
+    const { isLoading, isError,  data: coin } = useQuery({
         queryKey: ['coinDetails', id],
         queryFn: () => fetchCoinDetails(id),
         cacheTime: 1000 * 60 * 2,
@@ -17,7 +18,7 @@ function CoinDetails() {
     });
 
     if (isError) {
-        return <div>Error while fetching Coin Details : {error} </div>
+        return <div>Error while fetching Coin Details </div>
     }
 
     if (isLoading) {
@@ -77,11 +78,10 @@ function CoinDetails() {
                 </div>
             </div>
 
-            <div className="md:w-2/3 w-full p-6">
-                Coin Information
+            <div className="md:w-2/3 w-full p-10">
 
 
-                noininoinoi
+                <Chart id={id}/>
             </div>
 
         </div>

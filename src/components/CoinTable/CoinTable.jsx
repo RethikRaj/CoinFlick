@@ -4,6 +4,7 @@ import { fetchCoinDataByMarket } from "../../services/fetchCoinDataByMarket";
 import { useState } from "react";
 import { useCurrencyStore } from "../../store/currencyStore";
 import { useNavigate } from "react-router-dom";
+import CoinTableLoader from "../Loaders/CoinTableLoader";
 
 function CoinTable() {
     const currency = useCurrencyStore((state)=>state.currency);
@@ -36,9 +37,9 @@ function CoinTable() {
                     </thead>
                     <tbody>
                         {isLoading && (
-                            <tr className="text-center">
+                            <tr>
                                 <td colSpan="4">
-                                    <span className="loading loading-spinner text-primary"></span>
+                                    <CoinTableLoader/>
                                 </td>
                             </tr>
                         )}

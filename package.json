@@ -16,6 +16,7 @@
     "daisyui": "^5.0.12",
     "html-react-parser": "^5.2.3",
     "react": "^19.0.0",
+    "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.0",
     "tailwindcss": "^4.1.3",

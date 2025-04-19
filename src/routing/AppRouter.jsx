@@ -1,14 +1,35 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
-import Home from "../pages/Home";
-import CoinDetails from "../pages/CoinDetails";
+import { lazy , Suspense} from "react";
+import CoinTableLoader from "../components/Loaders/CoinTableLoader";
 
+
+
+const Home = lazy(()=>import("../pages/Home"));
+const CoinDetails = lazy(()=>import("../pages/CoinDetails"));
 const AppRouter = ()=>{
     return (
         <Routes>
             <Route path="/" element={<MainLayout />}>
-                <Route index element={<Home />} />
-                <Route path="details/:id" element={<CoinDetails />} />
+                <Route index element={
+                    <Suspense fallback={<CoinTableLoader/>}>
+                        <Home />
+                    </Suspense>
+                } 
+                />
+                <Route path="details/:id" element={
+                    <Suspense fallback={
+                        <h1>Loading....</h1>
+                        // <div className="flex justify-center">
+                        //     <h1>Fetching Coin Details Pageee...</h1>
+                        //     <span className="loading loading-spinner text-primary"></span>
+                        // </div>
+                    }
+                    >
+                        <CoinDetails />
+                    </Suspense>
+                } 
+                />
             </Route>
 
         </Routes>

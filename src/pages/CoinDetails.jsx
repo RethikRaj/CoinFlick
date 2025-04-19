@@ -36,6 +36,7 @@ function CoinDetails() {
                     alt={coin?.name}
                     src={coin?.image?.large}
                     className="h-52 mb-5"
+                    loading="lazy"
                 />
 
                 <h1

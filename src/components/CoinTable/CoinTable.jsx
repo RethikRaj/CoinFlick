@@ -59,7 +59,9 @@ function CoinTable() {
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
                                                         src={coin.image}
-                                                        alt="Avatar Tailwind CSS Component" />
+                                                        alt="Avatar Tailwind CSS Component" 
+                                                        loading="lazy"
+                                                    />
                                                 </div>
                                             </div>
                                             <div>

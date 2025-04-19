@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchCoinDataByMarket } from "../../services/fetchCoinDataByMarket";
 import { useState } from "react";
 import { useCurrencyStore } from "../../store/currencyStore";
+import { useNavigate } from "react-router-dom";
 
 function CoinTable() {
     const currency = useCurrencyStore((state)=>state.currency);
@@ -15,6 +16,7 @@ function CoinTable() {
         cacheTime: 1000 * 60 * 2, // 2 minutes . Even if cache time is set , data is refetched but ui is updated immediately from cache and if some inconsistencies happen then ui is updated again
         staleTime: 1000 * 60 * 2, // In this time period , data is not refetched because it is considered as fresh 
     })
+    const navigate = useNavigate();
 
 
 
@@ -49,7 +51,7 @@ function CoinTable() {
                         
                         {data && data.map((coin)=>{
                             return (
-                                <tr key={coin.id}>
+                                <tr key={coin.id} className="cursor-pointer" onClick={()=>{navigate(`/details/${coin.id}`)}}>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">

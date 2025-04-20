@@ -3,6 +3,7 @@ import fetchCoinChartData from "../../services/fetchCoinChartData";
 import CustomLineChart from "../Chart/CustomLineChart";
 import { DAY_OPTIONS } from "../../helpers/constants";
 import { useEffect, useState } from "react";
+import Alert from "../Alert/Alert";
 
 
 const CoinCharts = ({id, currency})=>{
@@ -37,7 +38,7 @@ const CoinCharts = ({id, currency})=>{
     }
 
     if(isChartError){
-        return <div>Error while fetching chart data</div>
+        return <Alert message="Error fetching chart data" type="error"/>
     }
 
     if(isChartLoading){

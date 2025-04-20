@@ -4,6 +4,7 @@ import fetchCoinDetails from "../services/fetchCoinDetails";
 import { useCurrencyStore } from "../store/currencyStore";
 import parse from 'html-react-parser';
 import CoinCharts from "../components/CoinCharts/CoinCharts";
+import Alert from "../components/Alert/Alert";
 
 
 function CoinDetails() {
@@ -20,7 +21,7 @@ function CoinDetails() {
     
 
     if (isCoinDetailsError) {
-        return <div>Error while fetching Coin Details </div>
+        return <Alert message="Error fetching coin details" type="error" />
     }
 
     if (isCoinDetailsLoading) {

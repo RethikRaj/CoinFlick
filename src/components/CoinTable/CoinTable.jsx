@@ -5,11 +5,12 @@ import { useState } from "react";
 import { useCurrencyStore } from "../../store/currencyStore";
 import { useNavigate } from "react-router-dom";
 import CoinTableLoader from "../Loaders/CoinTableLoader";
+import Alert from "../Alert/Alert";
 
 function CoinTable() {
     const currency = useCurrencyStore((state)=>state.currency);
     const [page, setPage] = useState(1);
-    const { isError, isLoading, error, data } = useQuery({
+    const { isError, isLoading, data } = useQuery({
         queryKey: ['coins', page, currency],
         queryFn: () => fetchCoinDataByMarket(currency, page),
         // retry: 2,
@@ -46,7 +47,9 @@ function CoinTable() {
 
                         {isError && (
                             <tr>
-                                <td colSpan="4">Error: {error.message}</td>
+                                <td colSpan="4">
+                                    <Alert message={"Error fetching coin data"} type="error"/>
+                                </td>
                             </tr>
                         )}
                         

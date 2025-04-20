@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import fetchCoinDetails from "../services/fetchCoinDetails";
 import { useCurrencyStore } from "../store/currencyStore";
 import parse from 'html-react-parser';
-import fetchCoinChartData from "../services/fetchCoinChartData";
-import CustomLineChart from "../components/Chart/CustomLineChart";
+import CoinCharts from "../components/CoinCharts/CoinCharts";
 
 
 function CoinDetails() {
@@ -18,20 +17,7 @@ function CoinDetails() {
         staleTime: 1000 * 60 * 2
     });
 
-    const {isError: isChartError, isLoading : isChartLoading, data : chartData} = useQuery({
-        queryKey: ['coinChartData', id, currency],
-        queryFn: async () => {
-            const responsedData = await fetchCoinChartData(id, currency);
-            return responsedData.prices.map((ele)=>{
-                return {
-                    name : new Date(ele[0]).toDateString(),
-                    price : Math.round(ele[1]*100)/100
-                }
-            })
-        },
-        cacheTime: 1000 * 60 * 2,
-        staleTime: 1000 * 60 * 2
-    })
+    
 
     if (isCoinDetailsError) {
         return <div>Error while fetching Coin Details </div>
@@ -95,14 +81,7 @@ function CoinDetails() {
             </div>
 
             <div className="md:w-2/3 w-full p-10">
-                {
-                    isChartError && <div>Error while fetching chart data</div>
-                }
-
-                {isChartLoading && <div className="flex justify-center">
-                    <span className="loading loading-spinner text-primary"></span>
-                </div>}
-                <CustomLineChart data={chartData} dataKey="price"/>
+                <CoinCharts id={id} currency={currency} />
             </div>
 
         </div>

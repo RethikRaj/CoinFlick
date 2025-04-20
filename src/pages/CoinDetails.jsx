@@ -1,35 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import fetchCoinDetails from "../services/fetchCoinDetails";
 import { useCurrencyStore } from "../store/currencyStore";
-
 import CoinCharts from "../components/CoinCharts/CoinCharts";
-import Alert from "../components/Alert/Alert";
 import CoinDescription from "../components/CoinDescription/CoinDescription";
 
 
 function CoinDetails() {
     const currency = useCurrencyStore((state) => state.currency)
     const { id } = useParams();
-
-    const { isLoading: isCoinDetailsLoading, isError: isCoinDetailsError,  data: coin } = useQuery({
-        queryKey: ['coinDetails', id],
-        queryFn: () => fetchCoinDetails(id),
-        cacheTime: 1000 * 60 * 2,
-        staleTime: 1000 * 60 * 2
-    });
-
-    
-
-    if (isCoinDetailsError) {
-        return <Alert message="Error fetching coin details" type="error" />
-    }
-
-    if (isCoinDetailsLoading) {
-        return <div className="flex justify-center">
-            <span className="loading loading-spinner text-primary"></span>
-        </div>
-    }
 
     return (
         <div className="flex flex-col md:flex-row my-2">
@@ -38,7 +15,7 @@ function CoinDetails() {
             <div
                 className="md:w-1/3 w-full flex flex-col items-center mt-6 md:mt-0 md:border-r-2 md:border-b-0 border-gray-500 border-b-2"
             >
-                <CoinDescription coin={coin} currency={currency}/>
+                <CoinDescription id={id} currency={currency}/>
             </div>
 
             {/* Coin Charts */}

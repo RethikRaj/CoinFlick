@@ -1,6 +1,28 @@
 import parse from 'html-react-parser';
+import fetchCoinDetails from "../services/fetchCoinDetails";
+import { useQuery } from "@tanstack/react-query";
 
-const CoinDescription = ({coin, currency}) => {
+const CoinDescription = ({id, currency}) => {
+
+    const { isLoading: isCoinDescriptionLoading, isError: isCoinDescriptionError,  data: coin } = useQuery({
+        queryKey: ['coinDetails', id],
+        queryFn: () => fetchCoinDetails(id),
+        cacheTime: 1000 * 60 * 2,
+        staleTime: 1000 * 60 * 2
+    });
+
+    
+
+    if (isCoinDescriptionError) {
+        return <Alert message="Error fetching coin details" type="error" />
+    }
+
+    if (isCoinDescriptionLoading) {
+        return <div className="flex justify-center">
+            <span className="loading loading-spinner text-primary"></span>
+        </div>
+    }
+
     return (
         <>
             <img

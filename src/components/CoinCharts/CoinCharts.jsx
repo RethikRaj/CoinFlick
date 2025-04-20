@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import fetchCoinChartData from "../../services/fetchCoinChartData";
 import CustomLineChart from "../Chart/CustomLineChart";
 import { DAY_OPTIONS } from "../../helpers/constants";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Alert from "../Alert/Alert";
+import useFetch from "../../hooks/useFetch";
 
 
 const CoinCharts = ({id, currency})=>{
@@ -11,24 +11,8 @@ const CoinCharts = ({id, currency})=>{
     const [days, setDays] = useState(1);
     const [coinInterval, setCoinInterval] = useState("");
 
-    const {isError: isChartError, isLoading : isChartLoading, data : chartData} = useQuery({
-        queryKey: ['coinChartData', id, currency, days, coinInterval],
-        queryFn: async () => fetchCoinChartData(id, currency, days,coinInterval)
-            // return responsedData.prices.map((ele)=>{
-            //     return {
-            //         name : new Date(ele[0]).toDateString(),
-            //         price : Math.round(ele[1]*100)/100
-            //     }
-            // })
-        ,
-        cacheTime: 1000 * 60 * 2,
-        staleTime: 1000 * 60 * 2
-    })
+    const {isError: isChartError, isLoading : isChartLoading, data : chartData} = useFetch('coinChartData', fetchCoinChartData, [id, currency, days,coinInterval]);
 
-    useEffect(()=>{
-        console.log(days);
-        console.log(coinInterval);
-    },[days, coinInterval])
 
     const handleChange = (e)=>{
         console.log(typeof e.target.value);

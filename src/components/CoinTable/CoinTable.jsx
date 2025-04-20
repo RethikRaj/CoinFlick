@@ -1,26 +1,18 @@
-
-import { useQuery } from "@tanstack/react-query";
 import { fetchCoinDataByMarket } from "../../services/fetchCoinDataByMarket";
 import { useState } from "react";
 import { useCurrencyStore } from "../../store/currencyStore";
 import { useNavigate } from "react-router-dom";
 import CoinTableLoader from "../Loaders/CoinTableLoader";
 import Alert from "../Alert/Alert";
+import useFetch from "../../hooks/useFetch";
 
 function CoinTable() {
     const currency = useCurrencyStore((state)=>state.currency);
     const [page, setPage] = useState(1);
-    const { isError, isLoading, data } = useQuery({
-        queryKey: ['coins', page, currency],
-        queryFn: () => fetchCoinDataByMarket(currency, page),
-        // retry: 2,
-        // retryDelay: 1000,
-        cacheTime: 1000 * 60 * 2, // 2 minutes . Even if cache time is set , data is refetched but ui is updated immediately from cache and if some inconsistencies happen then ui is updated again
-        staleTime: 1000 * 60 * 2, // In this time period , data is not refetched because it is considered as fresh 
-    })
+
+    const {isError, isLoading, data} = useFetch('coins', fetchCoinDataByMarket, [currency, page]);
+
     const navigate = useNavigate();
-
-
 
     return (
        

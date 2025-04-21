@@ -1,6 +1,7 @@
 import parse from 'html-react-parser';
 import fetchCoinDetails from '../../services/fetchCoinDetails';
 import useFetch from '../../hooks/useFetch';
+import Alert from '../Alert/Alert';
 
 const CoinDescription = ({id, currency}) => {
 

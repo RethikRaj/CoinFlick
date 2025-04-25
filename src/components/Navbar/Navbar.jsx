@@ -13,7 +13,7 @@ function Navbar() {
 
     return (
         <div className="navbar bg-base-100 shadow-lg">
-            <div className="navbar-start w-1/2 md:w-1/3">
+            <div className="navbar-start w-1/2 md:w-1/2">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                         <svg
@@ -48,7 +48,7 @@ function Navbar() {
             <div className="navbar-center" onClick={goToHome}>
                 <a className="btn btn-ghost text-xl md:text-3xl">CoinFlick</a>
             </div>
-            <div className="navbar-end w-1/2 md:2/3">
+            <div className="navbar-end w-2/3 md:1/2">
                 <Search />
             </div>
         </div>

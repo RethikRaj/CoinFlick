@@ -1,12 +1,48 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 💸 CoinFlick
 
-Currently, two official plugins are available:
+CoinFlick is a sleek and responsive crypto tracking web app that gives you real-time updates on cryptocurrency prices. Built with React and powered by the CoinGecko API, it’s the perfect tool for anyone looking to keep an eye on the crypto market.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 Search your favorite coins with instant filtering
+- 📈 View live prices, market cap, and percentage changes
+- 📱 Fully responsive design for mobile and desktop
+- ⚡ Lightning-fast performance with optimized API handling
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Tailwind CSS
+- **API:** [CoinGecko API](https://www.coingecko.com/en/api)
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/RethikRaj/CoinFlick.git
+cd CoinFlick
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+
+## 🌐 Live Demo
+
+Check out the live app here:  
+👉 [coin-flick.vercel.app](https://coin-flick.vercel.app/)
+
+---
+
+Made with ❤️ by [Rethik Raj](https://github.com/RethikRaj)

@@ -3,13 +3,25 @@
 
 CoinFlick is a sleek and responsive crypto tracking web app that gives you real-time updates on cryptocurrency prices. Built with React and powered by the CoinGecko API, it’s the perfect tool for anyone looking to keep an eye on the crypto market.
 
+## 🖼️ Preview
+
+![CoinFlick Main Screen](public/coinflick-main.png)
+*Main dashboard showcasing real-time coin listings and market data*
+
+![CoinFlick Table](public/coinflick-table.png)
+*Paginated table displaying top cryptocurrencies with real-time price, 24h change, and market cap.*
+
+![CoinFlick Coin Detail](public/coinflick-detail.png)
+*Detailed coin view with historical data chart*
 
 ## 🚀 Features
 
-- 🔍 Search your favorite coins with instant filtering
-- 📈 View live prices, market cap, and percentage changes
-- 📱 Fully responsive design for mobile and desktop
-- ⚡ Lightning-fast performance with optimized API handling
+- 🔍 Search your favorite coins with instant filtering  
+- 📈 View live prices, market cap, and percentage changes  
+- 📊 Interactive chart view with selectable time ranges (1 day, 7 days, 30 days, etc.)  
+- 🔄 Pagination for navigating through multiple coin listings seamlessly  
+- 📱 Fully responsive design for mobile and desktop  
+- ⚡ Lightning-fast performance with optimized API handling  
 
 ## 🛠️ Tech Stack
 
